@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Merapi - Petualangan Anda Dimulai Di Sini</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="#hero" class="logo">Explore Merapi</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#hero">Beranda</a></li>
+                    <li><a href="#destinations">Destinasi</a></li>
+                    <li><a href="#packages">Paket Tur</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Rencanakan Petualangan Tak Terlupakan Anda</h1>
+            <p class="hero-subtitle">Jelajahi destinasi menakjubkan dengan perjalanan yang disesuaikan untuk Anda.</p>
+            <a href="#packages" class="btn-primary">Lihat Semua Paket <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section id="destinations" class="section-padded">
+        <div class="container">
+            <h3 class="section-title">Tempat-tempat Indah Menanti</h3>
+            <p class="section-description">Pilihan destinasi populer yang wajib Anda kunjungi.</p>
+            <div class="destination-grid">
+                <div class="card destination-card">
+                    <img src="https://via.placeholder.com/400x250?text=Gunung+Bromo" alt="Gunung Bromo">
+                    <div class="card-content">
+                        <h4>Gunung Bromo</h4>
+                        <p>Saksikan keindahan matahari terbit yang magis di atas lautan pasir.</p>
+                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <div class="card destination-card">
+                    <img src="https://via.placeholder.com/400x250?text=Pulau+Komodo" alt="Pulau Komodo">
+                    <div class="card-content">
+                        <h4>Pulau Komodo</h4>
+                        <p>Bertemu langsung dengan hewan purba Komodo di habitat aslinya.</p>
+                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <div class="card destination-card">
+                    <img src="https://via.placeholder.com/400x250?text=Raja+Ampat" alt="Raja Ampat">
+                    <div class="card-content">
+                        <h4>Raja Ampat</h4>
+                        <p>Surga bawah laut dengan keanekaragaman hayati terbaik di dunia.</p>
+                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="section-padded section-light-bg">
+        <div class="container">
+            <h3 class="section-title">Paket Tur Pilihan Kami</h3>
+            <p class="section-description">Petualangan yang dikurasi untuk pengalaman tak terlupakan.</p>
+            <div class="package-grid">
+                <div class="card package-card">
+                    <div class="card-header">
+                        <h4>Paket Regular</h4>
+                        <span class="package-price"></span>
+                    </div>
+                    <p>Jelajahi jalur gunung, dengan Destinasi:</p>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check-circle"></i> Museum Sisa Hartaku</li>
+                        <li><i class="fas fa-check-circle"></i> Bunker Kaliadem</li>
+                        <li><i class="fas fa-check-circle"></i> Batuan Alien</li>
+                        <li><i class="fas fa-check-circle"></i> Spot Foto Jip</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
+                </div>
+                <div class="card package-card">
+                    <div class="card-header">
+                        <h4>Paket Medium</h4>
+                        <span class="package-price"></span>
+                    </div>
+                    <p>Jelajahi jalur gunung, dengan Destinasi:.</p>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check-circle"></i> Semua destinasi di Paket Reguler</li>
+                        <li><i class="fas fa-check-circle"></i>Kali Gendol / Makam Mbah Maridjan (opsional)</li>
+                        <li><i class="fas fa-check-circle"></i> Petualangan Off-road Lebih Ekstrem (opsional)</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
+                </div>
+                <div class="card package-card">
+                    <div class="card-header">
+                        <h4>Paket Long Trip</h4>
+                        <span class="package-price"></span>
+                    </div>
+                    <p>Jelajahi jalur gunung, dengan Destinasi:</p>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check-circle"></i> Semua destinasi di Paket Medium</li>
+                        <li><i class="fas fa-check-circle"></i> Sunrise View Point</li>
+                        <li><i class="fas fa-check-circle"></i> Sungai Gendol Lava Bantal</li>
+                        <li><i class="fas fa-check-circle"></i> Desa Wisata Petung/Kinahrejo</li>
+                        <li><i class="fas fa-check-circle"></i> Opsional: Camping/BBQ (dengan biaya tambahan)</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-padded">
+        <div class="container">
+            <h3 class="section-title">Momen Indah Kami</h3>
+            <p class="section-description">Lihatlah kebahagiaan para petualang bersama JourneyEase.</p>
+            <div class="gallery-grid">
+                <img src="https://i.pinimg.com/736x/1e/69/34/1e6934c25f456f6e1d71fdd33d957f4a.jpg" alt="Momen Petualangan 1">
+                <img src="https://i.pinimg.com/736x/00/1b/c6/001bc60bac07ba34e252aafeeaca910f.jpg" alt="Momen Petualangan 2">
+                <img src="https://i.pinimg.com/736x/93/27/32/93273254a8c52c5a2b2fa70f2223d570.jpg" alt="Momen Petualangan 3">
+                <img src="https://i.pinimg.com/736x/4f/d7/cb/4fd7cb2f8c427fb704c39b6c33d1533b.jpg" alt="Momen Petualangan 4">
+                <img src="https://i.pinimg.com/736x/e5/59/65/e559652690f5d91b8b0031547a7479c3.jpg" alt="Momen Petualangan 5">
+                <img src="https://i.pinimg.com/236x/08/71/3e/08713ebfb07e2ae0798ffe24fb9728cd.jpg" alt="Momen Petualangan 6">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padded section-dark-bg">
+        <div class="container">
+            <h3 class="section-title text-light">Mari Mulai Perjalanan Anda!</h3>
+            <p class="section-description text-light">Fasilitas Umum (Tergantung Penyedia Jasa):
+                Sewa Jeep 4x4 dengan sopir/pemandu berpengalaman.
+                Bahan Bakar.
+                Helm (untuk keamanan).
+                Masker (melindungi dari debu).
+                Dokumentasi foto/video (opsional, bisa dengan pilot jeep atau fotografer tambahan).
+                Air mineral.
+                Tiket masuk objek wisata (biasanya sudah termasuk, konfirmasi lagi).</p>
+            <p class="section-description text-light">Punya pertanyaan atau ingin merencanakan tur kustom? Hubungi kami!</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Nama Lengkap Anda" required>
+                <input type="email" placeholder="Email Aktif Anda" required>
+                <textarea placeholder="Pesan atau Pertanyaan Anda..." rows="6"></textarea>
+                <button type="submit" class="btn-primary">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Explore Merapi. Semua Hak Cipta Dilindungi.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const mainNav = document.querySelector('.main-nav');
+
+            navToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                navToggle.querySelector('i').classList.toggle('fa-bars');
+                navToggle.querySelector('i').classList.toggle('fa-times');
+            });
+        });
+    </script>
+</body>
+</html>
