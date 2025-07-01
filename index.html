@@ -3,178 +3,629 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explore Merapi - Petualangan Anda Dimulai Di Sini</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Jeep Merapi - Petualangan Vulkanik Terbaik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B35;
+            --secondary: #F7931E;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 5%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            animation: slideInRight 0.6s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(255,107,53,0.9), rgba(247,147,30,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23333" width="1200" height="800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Floating Elements */
+        .floating-jeep {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-jeep:nth-child(2) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 1s;
+        }
+
+        .floating-jeep:nth-child(3) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        /* Packages Section */
+        .packages {
+            padding: 5rem 5%;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .package-card:nth-child(1) { animation-delay: 0.1s; }
+        .package-card:nth-child(2) { animation-delay: 0.2s; }
+        .package-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .package-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .package-card:hover .package-image::before {
+            left: 100%;
+        }
+
+        .package-content {
+            padding: 2rem;
+        }
+
+        .package-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+        }
+
+        .package-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .package-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .book-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .book-button:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Info Section */
+        .info {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popIn 0.6s ease forwards;
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0.1s; }
+        .info-item:nth-child(2) { animation-delay: 0.2s; }
+        .info-item:nth-child(3) { animation-delay: 0.3s; }
+        .info-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover .info-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .info-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .info-desc {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <a href="#hero" class="logo">Explore Merapi</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#hero">Beranda</a></li>
-                    <li><a href="#destinations">Destinasi</a></li>
-                    <li><a href="#packages">Paket Tur</a></li>
-                    <li><a href="#gallery">Galeri</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-            </nav>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">JEEP MERAPI</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#packages">Paket</a></li>
+                <li><a href="#info">Info</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section id="hero" class="hero-section">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="floating-jeep"></div>
+        <div class="floating-jeep"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Rencanakan Petualangan Tak Terlupakan Anda</h1>
-            <p class="hero-subtitle">Jelajahi destinasi menakjubkan dengan perjalanan yang disesuaikan untuk Anda.</p>
-            <a href="#packages" class="btn-primary">Lihat Semua Paket <i class="fas fa-arrow-right"></i></a>
+            <h1>Jelajahi Keagungan Merapi</h1>
+            <p>Rasakan sensasi petualangan vulkanik dengan Jeep 4x4 bersama pemandu berpengalaman</p>
+            <a href="#packages" class="cta-button">Mulai Petualangan</a>
         </div>
     </section>
 
-    <section id="destinations" class="section-padded">
-        <div class="container">
-            <h3 class="section-title">Tempat-tempat Indah Menanti</h3>
-            <p class="section-description">Pilihan destinasi populer yang wajib Anda kunjungi.</p>
-            <div class="destination-grid">
-                <div class="card destination-card">
-                    <img src="https://via.placeholder.com/400x250?text=Gunung+Bromo" alt="Gunung Bromo">
-                    <div class="card-content">
-                        <h4>Gunung Bromo</h4>
-                        <p>Saksikan keindahan matahari terbit yang magis di atas lautan pasir.</p>
-                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+    <!-- Packages Section -->
+    <section class="packages" id="packages">
+        <div class="section-header">
+            <h2>Pilihan Paket Wisata</h2>
+            <p>Temukan paket yang sesuai dengan petualangan impian Anda</p>
+        </div>
+        <div class="packages-grid">
+            <!-- Package 1 -->
+            <div class="package-card">
+                <div class="package-image"></div>
+                <div class="package-content">
+                    <h3 class="package-title">Paket Sunrise</h3>
+                    <ul class="package-features">
+                        <li>Durasi 3 jam</li>
+                        <li>Sunrise point view</li>
+                        <li>Bunker Kaliadem</li>
+                        <li>Museum Mini Sisa Hartaku</li>
+                        <li>Dokumentasi foto</li>
+                    </ul>
+                    <div class="package-price">
+                        Rp 450.000 <span>/jeep</span>
                     </div>
+                    <button class="book-button">Pesan Sekarang</button>
                 </div>
-                <div class="card destination-card">
-                    <img src="https://via.placeholder.com/400x250?text=Pulau+Komodo" alt="Pulau Komodo">
-                    <div class="card-content">
-                        <h4>Pulau Komodo</h4>
-                        <p>Bertemu langsung dengan hewan purba Komodo di habitat aslinya.</p>
-                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <!-- Package 2 -->
+            <div class="package-card">
+                <div class="package-image"></div>
+                <div class="package-content">
+                    <h3 class="package-title">Paket Adventure</h3>
+                    <ul class="package-features">
+                        <li>Durasi 4 jam</li>
+                        <li>Lava tour track</li>
+                        <li>Alien Stone</li>
+                        <li>Bunker Kaliadem</li>
+                        <li>Museum & dokumentasi</li>
+                    </ul>
+                    <div class="package-price">
+                        Rp 550.000 <span>/jeep</span>
                     </div>
+                    <button class="book-button">Pesan Sekarang</button>
                 </div>
-                <div class="card destination-card">
-                    <img src="https://via.placeholder.com/400x250?text=Raja+Ampat" alt="Raja Ampat">
-                    <div class="card-content">
-                        <h4>Raja Ampat</h4>
-                        <p>Surga bawah laut dengan keanekaragaman hayati terbaik di dunia.</p>
-                        <a href="#" class="card-link">Detail <i class="fas fa-chevron-right"></i></a>
+            </div>
+
+            <!-- Package 3 -->
+            <div class="package-card">
+                <div class="package-image"></div>
+                <div class="package-content">
+                    <h3 class="package-title">Paket Exclusive</h3>
+                    <ul class="package-features">
+                        <li>Durasi 5 jam</li>
+                        <li>Private tour guide</li>
+                        <li>All destinations</li>
+                        <li>Makan siang tradisional</li>
+                        <li>Free merchandise</li>
+                    </ul>
+                    <div class="package-price">
+                        Rp 750.000 <span>/jeep</span>
                     </div>
+                    <button class="book-button">Pesan Sekarang</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="packages" class="section-padded section-light-bg">
-        <div class="container">
-            <h3 class="section-title">Paket Tur Pilihan Kami</h3>
-            <p class="section-description">Petualangan yang dikurasi untuk pengalaman tak terlupakan.</p>
-            <div class="package-grid">
-                <div class="card package-card">
-                    <div class="card-header">
-                        <h4>Paket Regular</h4>
-                        <span class="package-price"></span>
-                    </div>
-                    <p>Jelajahi jalur gunung, dengan Destinasi:</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> Museum Sisa Hartaku</li>
-                        <li><i class="fas fa-check-circle"></i> Bunker Kaliadem</li>
-                        <li><i class="fas fa-check-circle"></i> Batuan Alien</li>
-                        <li><i class="fas fa-check-circle"></i> Spot Foto Jip</li>
-                    </ul>
-                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
-                </div>
-                <div class="card package-card">
-                    <div class="card-header">
-                        <h4>Paket Medium</h4>
-                        <span class="package-price"></span>
-                    </div>
-                    <p>Jelajahi jalur gunung, dengan Destinasi:.</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> Semua destinasi di Paket Reguler</li>
-                        <li><i class="fas fa-check-circle"></i>Kali Gendol / Makam Mbah Maridjan (opsional)</li>
-                        <li><i class="fas fa-check-circle"></i> Petualangan Off-road Lebih Ekstrem (opsional)</li>
-                    </ul>
-                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
-                </div>
-                <div class="card package-card">
-                    <div class="card-header">
-                        <h4>Paket Long Trip</h4>
-                        <span class="package-price"></span>
-                    </div>
-                    <p>Jelajahi jalur gunung, dengan Destinasi:</p>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check-circle"></i> Semua destinasi di Paket Medium</li>
-                        <li><i class="fas fa-check-circle"></i> Sunrise View Point</li>
-                        <li><i class="fas fa-check-circle"></i> Sungai Gendol Lava Bantal</li>
-                        <li><i class="fas fa-check-circle"></i> Desa Wisata Petung/Kinahrejo</li>
-                        <li><i class="fas fa-check-circle"></i> Opsional: Camping/BBQ (dengan biaya tambahan)</li>
-                    </ul>
-                    <a href="#" class="btn-secondary">Pesan Sekarang</a>
-                </div>
+    <!-- Info Section -->
+    <section class="info" id="info">
+        <div class="section-header">
+            <h2>Mengapa Memilih Kami?</h2>
+            <p>Pengalaman terbaik untuk petualangan Anda</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-icon">🚙</div>
+                <h3 class="info-title">Jeep 4x4 Terawat</h3>
+                <p class="info-desc">Armada jeep berkualitas dengan perawatan rutin</p>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">👨‍✈️</div>
+                <h3 class="info-title">Driver Berpengalaman</h3>
+                <p class="info-desc">Tim driver profesional dengan jam terbang tinggi</p>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🛡️</div>
+                <h3 class="info-title">Asuransi Perjalanan</h3>
+                <p class="info-desc">Perlindungan penuh selama perjalanan</p>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📸</div>
+                <h3 class="info-title">Spot Foto Terbaik</h3>
+                <p class="info-desc">Lokasi instagramable untuk kenangan indah</p>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="section-padded">
-        <div class="container">
-            <h3 class="section-title">Momen Indah Kami</h3>
-            <p class="section-description">Lihatlah kebahagiaan para petualang bersama JourneyEase.</p>
-            <div class="gallery-grid">
-                <img src="https://i.pinimg.com/736x/1e/69/34/1e6934c25f456f6e1d71fdd33d957f4a.jpg" alt="Momen Petualangan 1">
-                <img src="https://i.pinimg.com/736x/00/1b/c6/001bc60bac07ba34e252aafeeaca910f.jpg" alt="Momen Petualangan 2">
-                <img src="https://i.pinimg.com/736x/93/27/32/93273254a8c52c5a2b2fa70f2223d570.jpg" alt="Momen Petualangan 3">
-                <img src="https://i.pinimg.com/736x/4f/d7/cb/4fd7cb2f8c427fb704c39b6c33d1533b.jpg" alt="Momen Petualangan 4">
-                <img src="https://i.pinimg.com/736x/e5/59/65/e559652690f5d91b8b0031547a7479c3.jpg" alt="Momen Petualangan 5">
-                <img src="https://i.pinimg.com/236x/08/71/3e/08713ebfb07e2ae0798ffe24fb9728cd.jpg" alt="Momen Petualangan 6">
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padded section-dark-bg">
-        <div class="container">
-            <h3 class="section-title text-light">Mari Mulai Perjalanan Anda!</h3>
-            <p class="section-description text-light">Fasilitas Umum (Tergantung Penyedia Jasa):
-                Sewa Jeep 4x4 dengan sopir/pemandu berpengalaman.
-                Bahan Bakar.
-                Helm (untuk keamanan).
-                Masker (melindungi dari debu).
-                Dokumentasi foto/video (opsional, bisa dengan pilot jeep atau fotografer tambahan).
-                Air mineral.
-                Tiket masuk objek wisata (biasanya sudah termasuk, konfirmasi lagi).</p>
-            <p class="section-description text-light">Punya pertanyaan atau ingin merencanakan tur kustom? Hubungi kami!</p>
-            <form class="contact-form">
-                <input type="text" placeholder="Nama Lengkap Anda" required>
-                <input type="email" placeholder="Email Aktif Anda" required>
-                <textarea placeholder="Pesan atau Pertanyaan Anda..." rows="6"></textarea>
-                <button type="submit" class="btn-primary">Kirim Pesan</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 Explore Merapi. Semua Hak Cipta Dilindungi.</p>
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>Jeep Merapi Adventure</h3>
+            <p>Jl. Kaliurang KM 22, Hargobinangun, Sleman, Yogyakarta</p>
+            <p>📞 0812-3456-7890 | 📧 info@jeepmerapi.com</p>
             <div class="social-links">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#">📷</a>
+                <a href="#">📘</a>
+                <a href="#">🐦</a>
+                <a href="#">💬</a>
             </div>
+            <p style="margin-top: 2rem; opacity: 0.7;">© 2025 Jeep Merapi. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.querySelector('.nav-toggle');
-            const mainNav = document.querySelector('.main-nav');
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-            navToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
-                navToggle.querySelector('i').classList.toggle('fa-bars');
-                navToggle.querySelector('i').classList.toggle('fa-times');
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.package-card, .info-item').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Button click animations
+        document.querySelectorAll('.book-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                    alert('Terima kasih! Tim kami akan segera menghubungi Anda.');
+                }, 200);
             });
         });
     </script>
